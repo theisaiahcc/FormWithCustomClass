@@ -1,3 +1,7 @@
+function $(id:string){
+    return document.getElementById(id);
+}
+
 class VideoGame{
     title:string;
     price:number;
@@ -21,12 +25,20 @@ function displayGame(game:VideoGame):void{
     // TODO: display video game below form
 }
 
-function getVideoGame():VideoGame{
-    let Game = new VideoGame();
-    
-    // TODO: Populate with data
 
-    return Game;
+/**
+ * Creates video game object and fills it with form data
+ * @returns new VideoGame()
+ */
+function getVideoGame():VideoGame{
+    let game = new VideoGame();
+    
+    game.title = (<HTMLInputElement>$("title")).value;
+    game.price = parseFloat((<HTMLInputElement>$("price")).value);
+    game.rating = (<HTMLInputElement>$("rating")).value;
+    game.onlineExclusive = (<HTMLInputElement>$("online")).checked;
+
+    return game;
 }
 
 function allDataValid(){

@@ -1,3 +1,6 @@
+function $(id) {
+    return document.getElementById(id);
+}
 var VideoGame = (function () {
     function VideoGame() {
     }
@@ -16,8 +19,12 @@ function addVideoGame() {
 function displayGame(game) {
 }
 function getVideoGame() {
-    var Game = new VideoGame();
-    return Game;
+    var game = new VideoGame();
+    game.title = $("title").value;
+    game.price = parseFloat($("price").value);
+    game.rating = $("rating").value;
+    game.onlineExclusive = $("online").checked;
+    return game;
 }
 function allDataValid() {
     return true;
