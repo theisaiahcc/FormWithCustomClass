@@ -1,12 +1,14 @@
 form{
+    font-size: larger;
     margin: auto;
     width: 10%;
     padding: 10px;
 }
 
 input{
+    font-size:large;
     padding: .2em;
-    margin-bottom: .3em;
+    margin: .2em;
 }
 
 label{
