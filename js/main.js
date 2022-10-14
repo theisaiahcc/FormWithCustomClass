@@ -17,6 +17,19 @@ function addVideoGame() {
     }
 }
 function displayGame(game) {
+    var displayDiv = $("display");
+    var gameHeading = document.createElement("h2");
+    gameHeading.innerText = game.title;
+    var gameInfo = document.createElement("p");
+    gameInfo.innerText = game.title + " has a rating of " + game.rating + ". It costs $" + game.price.toFixed(2) + ". ";
+    if (game.onlineExclusive) {
+        gameInfo.innerText += "It is an online exclusive.";
+    }
+    else {
+        gameInfo.innerText += "It is not an online exclusive.";
+    }
+    displayDiv.appendChild(gameHeading);
+    displayDiv.appendChild(gameInfo);
 }
 function getVideoGame() {
     var game = new VideoGame();

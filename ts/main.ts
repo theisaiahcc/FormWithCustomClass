@@ -22,7 +22,30 @@ function addVideoGame(){
 }
 
 function displayGame(game:VideoGame):void{
-    // TODO: display video game below form
+    let displayDiv = $("display")
+
+    // create h2 with game title
+    let gameHeading = document.createElement("h2");
+    gameHeading.innerText = game.title;
+    
+    
+
+    // create game details paragraph
+    let gameInfo = document.createElement("p");
+
+    gameInfo.innerText = game.title  + " has a rating of " + game.rating + ". It costs $" + game.price.toFixed(2) + ". ";
+    
+    if(game.onlineExclusive){
+        gameInfo.innerText += "It is an online exclusive."
+    }
+
+    else{
+        gameInfo.innerText += "It is not an online exclusive."
+    }
+
+    // add h2 and p in the div
+    displayDiv.appendChild(gameHeading);
+    displayDiv.appendChild(gameInfo);
 }
 
 
