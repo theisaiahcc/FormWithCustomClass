@@ -24,11 +24,11 @@ function displayGame(game) {
     gameHeading.innerText = game.title;
     var gameInfo = document.createElement("p");
     gameInfo.innerText = game.title + " has a rating of " + game.rating + ". It costs $" + game.price.toFixed(2) + ". ";
-    if (game.onlineExclusive) {
-        gameInfo.innerText += "It is an online exclusive.";
+    if (game.exclusive == "Yes") {
+        gameInfo.innerText += "It is a platform exclusive.";
     }
     else {
-        gameInfo.innerText += "It is not an online exclusive.";
+        gameInfo.innerText += "It is not a platform exclusive.";
     }
     displayDiv.appendChild(gameHeading);
     displayDiv.appendChild(gameInfo);
@@ -38,7 +38,7 @@ function getVideoGame() {
     game.title = getInput("title").value;
     game.price = parseFloat($("price").value);
     game.rating = getInput("rating").value;
-    game.onlineExclusive = getInput("online").checked;
+    game.exclusive = getInput("exclusive").value;
     return game;
 }
 function getInput(id) {
@@ -46,22 +46,15 @@ function getInput(id) {
 }
 function allDataValid() {
     var isValid = true;
-    var title = getInput("title").value;
-    if (title == "") {
-        isValid = false;
-        postError("Title is required.");
-    }
+    isValid = validateInput("title");
     var price = getInput("price").value;
     var priceValue = parseFloat(price);
     if (price == "" || isNaN(priceValue)) {
         isValid = false;
         postError("Price is required and must be a number.");
     }
-    var rating = getInput("rating").value;
-    if (rating == "") {
-        isValid = false;
-        postError("Rating is required.");
-    }
+    isValid = validateInput("rating");
+    isValid = validateInput("exclusive");
     return isValid;
 }
 function clearAllErrors() {
@@ -73,4 +66,15 @@ function postError(message) {
     var errItem = document.createElement("li");
     errItem.innerText = "*" + message;
     errSummary.appendChild(errItem);
+}
+function validateInput(id) {
+    var input = getInput(id).value;
+    if (input == "") {
+        postError(capitalizeFirstLetter(id) + " is required.");
+        return false;
+    }
+    return true;
+}
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

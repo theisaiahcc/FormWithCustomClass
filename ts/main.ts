@@ -6,7 +6,7 @@ class VideoGame{
     title:string;
     price:number;
     rating:string;
-    onlineExclusive:boolean;
+    exclusive:string;
 }
 
 window.onload = function(){
@@ -38,12 +38,12 @@ function displayGame(game:VideoGame):void{
 
     gameInfo.innerText = game.title  + " has a rating of " + game.rating + ". It costs $" + game.price.toFixed(2) + ". ";
     
-    if(game.onlineExclusive){
-        gameInfo.innerText += "It is an online exclusive."
+    if(game.exclusive == "Yes"){
+        gameInfo.innerText += "It is a platform exclusive."
     }
 
     else{
-        gameInfo.innerText += "It is not an online exclusive."
+        gameInfo.innerText += "It is not a platform exclusive."
     }
 
     // add h2 and p in the div
@@ -62,7 +62,7 @@ function getVideoGame():VideoGame{
     game.title = getInput("title").value;
     game.price = parseFloat((<HTMLInputElement>$("price")).value);
     game.rating = getInput("rating").value;
-    game.onlineExclusive = getInput("online").checked;
+    game.exclusive = getInput("exclusive").value;
 
     return game;
 }
@@ -78,12 +78,7 @@ function getInput(id:string):HTMLInputElement{
 function allDataValid(){
     let isValid = true;
     
-    let title = getInput("title").value;
-    
-    if (title == ""){
-        isValid = false;
-        postError("Title is required.");
-    }
+    isValid = validateInput("title");
     
     let price = getInput("price").value;
     let priceValue = parseFloat(price);
@@ -93,11 +88,8 @@ function allDataValid(){
         postError("Price is required and must be a number.");
     }
 
-    let rating = getInput("rating").value;
-    if(rating == ""){
-        isValid = false;
-        postError("Rating is required.");
-    }
+    isValid = validateInput("rating");
+    isValid = validateInput("exclusive");
 
     return isValid;
 }
@@ -120,3 +112,23 @@ function postError(message:string){
     errItem.innerText = "*" + message;
     errSummary.appendChild(errItem);
 }
+
+/**
+ * Reduces code redundancy in allDataValid method
+ * @param id id of desired input element
+ * @returns true if not empty
+ */
+function validateInput(id:string):boolean{
+    let input = getInput(id).value;
+    if(input == ""){
+        postError(capitalizeFirstLetter(id) + " is required.");
+        return false;
+        
+    }
+    return true;
+}
+
+// capitalizes first letter of a string
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }

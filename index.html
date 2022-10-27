@@ -17,8 +17,11 @@
             <br>
             <input type="text" id="price" placeholder = Price>
             <br>
-            
-            <label for="rating">Rating:</label>
+            <div id="labels">
+                <label for="rating">Rating:</label>
+                <br>
+                <label for="exclusive">Exclusive:</label>
+            </div>
             <select id="rating">
                 <option value="">--</option>
                 <option>E</option>
@@ -26,8 +29,11 @@
                 <option>M</option>
             </select>
             <br>
-            <label for="online">Online only?</label>
-            <input type="checkbox" id="online">
+            <select id="exclusive">
+                <option value="">--</option>
+                <option>Yes</option>
+                <option>No</option>
+            </select>
             <br>
             <button type="button">Add Game</button>
         </fieldset>
