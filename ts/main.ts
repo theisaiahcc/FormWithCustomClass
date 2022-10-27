@@ -15,6 +15,9 @@ window.onload = function(){
 }
 
 function addVideoGame(){
+    console.log("Add video game was called");
+    clearAllErrors();
+
     if (allDataValid()){
         let game = getVideoGame();
         displayGame(game);
@@ -56,14 +59,64 @@ function displayGame(game:VideoGame):void{
 function getVideoGame():VideoGame{
     let game = new VideoGame();
     
-    game.title = (<HTMLInputElement>$("title")).value;
+    game.title = getInput("title").value;
     game.price = parseFloat((<HTMLInputElement>$("price")).value);
-    game.rating = (<HTMLInputElement>$("rating")).value;
-    game.onlineExclusive = (<HTMLInputElement>$("online")).checked;
+    game.rating = getInput("rating").value;
+    game.onlineExclusive = getInput("online").checked;
 
     return game;
 }
 
+function getInput(id:string):HTMLInputElement{
+    return <HTMLInputElement>$(id);
+}
+
+/**
+ * validates data
+ * @returns true if data is valid
+ */
 function allDataValid(){
-    return true; //placeholder
+    let isValid = true;
+    
+    let title = getInput("title").value;
+    
+    if (title == ""){
+        isValid = false;
+        postError("Title is required.");
+    }
+    
+    let price = getInput("price").value;
+    let priceValue = parseFloat(price);
+
+    if(price == "" || isNaN(priceValue)){
+        isValid = false;
+        postError("Price is required and must be a number.");
+    }
+
+    let rating = getInput("rating").value;
+    if(rating == ""){
+        isValid = false;
+        postError("Rating is required.");
+    }
+
+    return isValid;
+}
+
+/**
+ * clears validation summary
+ */
+function clearAllErrors() {
+    let errSummary = $("validation-summary");
+    errSummary.innerText = "";
+}
+
+/**
+ * posts a message to error <ul>
+ * @param message message to post
+ */
+function postError(message:string){
+    let errSummary = $("validation-summary");
+    let errItem = document.createElement("li");
+    errItem.innerText = message;
+    errSummary.appendChild(errItem);
 }

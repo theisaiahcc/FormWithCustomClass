@@ -9,10 +9,6 @@
 </head>
 <body>
     <h1>Add Video Game</h1>
-
-    <div id="validation-summary">
-        <p>Errors go here...</p>
-    </div>
     
     <form>
         <fieldset>
@@ -24,6 +20,7 @@
             
             <label for="rating">Rating:</label>
             <select id="rating">
+                <option value="">--</option>
                 <option>E</option>
                 <option>T</option>
                 <option>M</option>
@@ -35,7 +32,11 @@
             <button type="button">Add Game</button>
         </fieldset>
     </form>
+    <div id="error">
+        <ul id = validation-summary>
 
+        </ul>
+    </div>
     <div id="display"></div>
     <script src="js/main.js"></script>
 </body>

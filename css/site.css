@@ -18,3 +18,13 @@ label{
 button{
     margin-top: .4em;
 }
+
+#error {
+    margin:auto;
+    width: 20%;
+    padding-left: 5%;
+}
+
+li{
+    list-style-type:none
+}
