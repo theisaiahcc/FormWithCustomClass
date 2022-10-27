@@ -71,6 +71,6 @@ function clearAllErrors() {
 function postError(message) {
     var errSummary = $("validation-summary");
     var errItem = document.createElement("li");
-    errItem.innerText = message;
+    errItem.innerText = "*" + message;
     errSummary.appendChild(errItem);
 }

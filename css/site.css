@@ -1,8 +1,6 @@
 form{
     font-size: larger;
-    margin: auto;
-    width: 10%;
-    padding: 10px;
+    padding-top: 10px;
 }
 
 input{
@@ -20,11 +18,10 @@ button{
 }
 
 #error {
-    margin:auto;
-    width: 20%;
-    padding-left: 5%;
+    width: 100%;
 }
 
 li{
-    list-style-type:none
+    list-style-type:none;
+    color: red;
 }
