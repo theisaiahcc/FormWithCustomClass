@@ -45,17 +45,7 @@ function getInput(id) {
     return $(id);
 }
 function allDataValid() {
-    var isValid = true;
-    isValid = validateInput("title");
-    var price = getInput("price").value;
-    var priceValue = parseFloat(price);
-    if (price == "" || isNaN(priceValue)) {
-        isValid = false;
-        postError("Price is required and must be a number.");
-    }
-    isValid = validateInput("rating");
-    isValid = validateInput("exclusive");
-    return isValid;
+    return validateInput("title") && validatePrice("price") && validateInput("rating") && validateInput("exclusive");
 }
 function clearAllErrors() {
     var errSummary = $("validation-summary");
@@ -77,4 +67,13 @@ function validateInput(id) {
 }
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function validatePrice(id) {
+    var price = getInput("price").value;
+    var priceValue = parseFloat(price);
+    if (price == "" || isNaN(priceValue)) {
+        postError("Price is required and must be a number.");
+        return false;
+    }
+    return true;
 }

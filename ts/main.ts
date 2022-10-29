@@ -76,22 +76,7 @@ function getInput(id:string):HTMLInputElement{
  * @returns true if data is valid
  */
 function allDataValid(){
-    let isValid = true;
-    
-    isValid = validateInput("title");
-    
-    let price = getInput("price").value;
-    let priceValue = parseFloat(price);
-
-    if(price == "" || isNaN(priceValue)){
-        isValid = false;
-        postError("Price is required and must be a number.");
-    }
-
-    isValid = validateInput("rating");
-    isValid = validateInput("exclusive");
-
-    return isValid;
+    return validateInput("title") && validatePrice("price") && validateInput("rating") && validateInput("exclusive");
 }
 
 /**
@@ -132,3 +117,15 @@ function validateInput(id:string):boolean{
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
+// validates price because its different.
+function validatePrice (id:string):boolean{
+    let price = getInput("price").value;
+    let priceValue = parseFloat(price);
+
+    if(price == "" || isNaN(priceValue)){
+        postError("Price is required and must be a number.");
+        return false;
+    }
+    return true;
+}
